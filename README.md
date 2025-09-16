@@ -65,12 +65,12 @@ Typical installation procedure may look like this:
 
 1. Download and extract:
 
-    $ wget https://github.com/anfiau/pgelog/archive/pgelog-v1.0.tar.gz
-    $ tar -xzf pgelog-v1.0.tar.gz
+	    $ wget https://github.com/anfiau/pgelog/archive/refs/tags/v1.0.0.tar.gz
+	    $ tar -xzf pgelog-1.0.0.tar.gz
 
 2. Install:
 
-    $ sudo make install -C pgelog-1.0
+	    $ sudo make install -C pgelog-1.0.0
 
 3. Enable in your database:
 
