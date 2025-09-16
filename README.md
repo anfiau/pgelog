@@ -302,7 +302,7 @@ SELECT pgelog_clean_log();
 
 | Function                     | Returns    | Description |
 |------------------------------|------------|-------------|
-| pgelog_to_log(...)           | BOOLEAN    | Write a log entry |
+| pgelog_to_log(log_type,log_func,log_info,phase,sqlerrm,sqlstate) | BOOLEAN    | Write a log entry |
 | pgelog_init()                | BOOLEAN    | Initialize dblink (auto-called) |
 | pgelog_close()               | BOOLEAN    | Close dblink manually |
 | pgelog_clean_log(minutes)    | BOOLEAN    | Remove old records |
