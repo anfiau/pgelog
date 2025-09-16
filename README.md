@@ -53,7 +53,8 @@ SELECT * FROM dblink(
 ```
 
 Should return: 
-```It works!
+```conf
+It works!
 ```
 
 ---
