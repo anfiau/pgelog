@@ -1,0 +1,5 @@
+comment = 'Extended logging by pseudo-autonomous transactions via dblink into log table'
+default_version = '1.0'
+relocatable = false
+encoding = UTF8
+requires = 'pg_variables, dblink'
