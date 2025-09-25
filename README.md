@@ -52,7 +52,8 @@ SELECT * FROM dblink(
 ) AS t(result text);
 ```
 
-Should return: 
+Should return:
+
 ```conf
 It works!
 ```
@@ -65,12 +66,24 @@ Typical installation procedure may look like this:
 
 1. Download and extract:
 
-	    $ wget https://github.com/anfiau/pgelog/archive/refs/tags/v1.0.0.tar.gz
-	    $ tar -xzf pgelog-1.0.0.tar.gz
+```bash
+$ wget https://github.com/anfiau/pgelog/archive/refs/tags/v1.0.1.tar.gz
+$ tar -xzf pgelog-1.0.1.tar.gz
+$ cd pgelog-1.0.1
+$ chmod +x find-pg_config.sh
+```
 
-2. Install:
+2. Install for the latest PostgreSQL version detected:
 
-	    $ sudo make install -C pgelog-1.0.0
+```bash
+$ sudo make install
+```
+
+   Or install for a specific version (for example, set path to pg_config of 11):
+
+```bash
+$ sudo make PG_CONFIG=/usr/pgsql-11/bin/pg_config install
+```
 
 3. Enable in your database:
 
@@ -86,7 +99,7 @@ CREATE EXTENSION pgelog;
 
 ### Table: pgelog_params
 
-Stores configuration parameters.
+Stores configuration parameters
 
 
 | Column       | Type     | Description |
@@ -97,7 +110,7 @@ Stores configuration parameters.
 
 ### Table: pgelog_logs
 
-Main log storage.
+Main log storage
 
 
 |Column        |Type          |Description  |
@@ -107,7 +120,7 @@ Main log storage.
 | log_func     | TEXT         | Source function or context |
 | phase        | TEXT         | Phase label (e.g., 1, 2.a) |
 | log_info     | TEXT         | Message body |
-| xact_id      | TEXT         | Transaction ID (txid_current() or equivalent) |
+| xact_id      | TEXT         | Transaction ID by pg_current_xact_id() or txid_current() |
 | sqlstate     | TEXT         | SQLSTATE code |
 | sqlerrm      | TEXT         | Error message (SQLERRM) |
 | conn_name    | TEXT         | dblink connection name used |
@@ -115,7 +128,7 @@ Main log storage.
 
 ### View: pgelog_vw_logs
 
-Main log storage with timing.
+Main log storage with timing
 
 
 | Column       | Type         | Description |
@@ -125,7 +138,7 @@ Main log storage with timing.
 | log_func     | TEXT         | Source function or context |
 | phase        | TEXT         | Phase label (e.g., 1, 2.a) |
 | log_info     | TEXT         | Message body |
-| xact_id      | TEXT         | Transaction ID (txid_current() or equivalent) |
+| xact_id      | TEXT         | Transaction ID by pg_current_xact_id() or txid_current() |
 | time_s       | INTEGER      | Time in seconds since the previous log entry for the same xact_id |
 | delta_t      | INTEGER      | Time in seconds since first log entry for the same xact_id (~ time from function call to this phase) |
 | sqlstate     | TEXT         | SQLSTATE code |
@@ -160,8 +173,7 @@ LIMIT 1;
 | 2025-09-15 10:54:41.907   | Test of logging by pgelog |
 
 
-
-### Logging Exception in PL/pgSQL 
+### Logging Exception in PL/pgSQL
 
 - Execute PL/pgSQL block raising an exception
 
@@ -219,7 +231,7 @@ END $$;
 - Read latest entry with 'FAIL' log_type
 
 ```sql
-SELECT L.log_info, L.sqlerrm 
+SELECT L.log_info, L.sqlerrm
 FROM   pgelog_logs L
 WHERE  L.log_type = 'FAIL'
 ORDER BY L.log_stamp DESC
@@ -239,16 +251,16 @@ LIMIT 1;
 Use pgelog_set_param() and pgelog_get_param():
 
 ```sql
-SELECT pgelog_get_param('pgelog_ttl_minutes'); -- old value = 1440
-SELECT pgelog_set_param('pgelog_ttl_minutes', '2880');
-SELECT pgelog_get_param('pgelog_ttl_minutes'); -- new value = 2880
+SELECT pgelog_get_param('pgelog_ttl_minutes'); -- get old value = 1440
+SELECT pgelog_set_param('pgelog_ttl_minutes', '2880'); -- set new value = 2880
+SELECT pgelog_get_param('pgelog_ttl_minutes'); -- get new value = 2880
 ```
 
 | Parameter                | Default     | Description |
 |--------------------------|-------------|-------------|
 | pgelog_port              | '5432'      | Database port |
 | pgelog_pgv_transactional | 'y'         | Use pg_variables in transactional mode |
-| pgelog_assign_xact_id    | 'n'         | Force xact ID assignment (converts read-only tx) |
+| pgelog_assign_xact_id    | 'n'         | Force xact ID assignment for read-only tx |
 | pgelog_is_active         | 'y'         | Global logging toggle |
 | pgelog_pgv_package       | 'pgelog'    | pg_variables package name |
 | pgelog_ttl_minutes       | '1440'      | Retention time in minutes (default: 1 day) |

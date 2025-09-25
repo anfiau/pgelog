@@ -210,7 +210,7 @@ IF (v_Log_Call = 'y') THEN
    v_Log_Type  := 'pgelog';
    v_Log_Func  := format('%s.pgelog_init',current_schema);
    v_Phase     := '7)';
-   v_Log_Info  := format('v_Conn_Str=%s',COALESCE(v_Conn_Str,'NULL'));
+   v_Log_Info  := format('v_Conn_Name=%s',COALESCE(v_Conn_Name,'NULL'));
    PERFORM pgelog_to_log(
                          v_Log_Type -- 1; Kind of log record - FAIL, WARN, INFO etc
                         ,v_Log_Func -- 2; Name of log record source - stored function, trigger, SQL clause etc
