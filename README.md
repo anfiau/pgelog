@@ -67,9 +67,9 @@ Typical installation procedure may look like this:
 1. Download and extract:
 
 ```bash
-$ wget https://github.com/anfiau/pgelog/archive/refs/tags/v1.0.1.tar.gz
-$ tar -xzf pgelog-1.0.1.tar.gz
-$ cd pgelog-1.0.1
+$ wget https://github.com/anfiau/pgelog/archive/refs/tags/v1.0.2.tar.gz
+$ tar -xzf pgelog-1.0.2.tar.gz
+$ cd pgelog-1.0.2
 $ chmod +x find-pg_config.sh
 ```
 
