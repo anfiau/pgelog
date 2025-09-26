@@ -1,0 +1,39 @@
+{
+    "name": "pgelog",
+    "abstract": "Enhanced PostgreSQL error logging extension",
+    "description": "pgelog enables logging into a database table using pseudo-autonomous transactions via dblink. Logs survives even on rollback. To optimize performance, dblink connection is cached to pg_variables.",
+    "version": "1.0.2",
+    "maintainer": "Anatoly Anfinogenov <anfiau@yandex.ru>",
+    "license": "postgresql",
+    "provides": {
+        "pgelog": {
+            "file": "pgelog--1.0.2.sql",
+            "docfile": "README.md",
+            "version": "1.0.2"
+        }
+    },
+    "prereqs": {
+        "runtime": {
+            "requires": {
+                "PostgreSQL": "11.0.0"
+            }
+        }
+    },
+    "resources": {
+        "homepage": "https://github.com/anfiau/pgelog",
+        "bugtracker": {
+            "web": "https://github.com/anfiau/pgelog/issues"
+        },
+        "repository": {
+            "url": "https://github.com/anfiau/pgelog.git",
+            "web": "https://github.com/anfiau/pgelog",
+            "type": "git"
+        }
+    },
+    "generated_by": "Anatoly Anfinogenov",
+    "meta-spec": {
+        "version": "1.0.0",
+        "url": "https://pgxn.org/spec/"
+    },
+    "tags": ["logging", "errors", "extension", "audit"]
+}

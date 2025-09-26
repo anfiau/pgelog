@@ -77,12 +77,14 @@ $ chmod +x find-pg_config.sh
 
 ```bash
 $ sudo make install
+$ make installcheck
 ```
 
    Or install for a specific version (for example, set path to pg_config of 11):
 
 ```bash
 $ sudo make PG_CONFIG=/usr/pgsql-11/bin/pg_config install
+$ make PG_CONFIG=/usr/pgsql-11/bin/pg_config installcheck
 ```
 
 3. Enable in your database:
@@ -333,4 +335,12 @@ All exceptions in **pgelog** functions are caught silently to avoid disrupting c
 This ensures logging never causes unintended rollbacks.
 
 ---
+
+## PGXN
+
+This extension is available on [PGXN](https://pgxn.org/dist/pgelog/). Install it with:
+
+```bash
+pgxn install pgelog
+```
 

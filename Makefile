@@ -16,8 +16,9 @@ else
 endif
 
 # pgelog definition
+REGRESS = pgelog
 EXTENSION = pgelog
-DATA = pgelog--1.0.sql
+DATA = pgelog--1.0.2.sql
 
 PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
